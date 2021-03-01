@@ -5,7 +5,6 @@ const readline = require('readline');
 const url = 'http://norvig.com/big.txt';
 
 var wordsWithStats = {};
-const occurence=0;
 
 const makeCollection = async(text) => {
     let words = text.trim().split(' ');
@@ -14,7 +13,10 @@ const makeCollection = async(text) => {
         if(wordsWithStats.hasOwnProperty(currentWord)){
             wordsWithStats[currentWord].count++;
         }else{
-            wordsWithStats[currentWord]={count:1}
+            wordsWithStats[currentWord]={Text:currentWord, count:1, syn:'',pos:''};
+            //const resp = axios.get('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20210216T114936Z.e4989dccd61b9626.373cddfbfb8a3b2ff30a03392b4e0b076f14cff9&lang=en-ru&text='+currentWord);
+            //wordsWithStats[currentWord].syn=''+def[0].tr[0].syn[0].text+'';
+            //wordsWithStats[currentWord].pos=''+def[0].pos+'';
         }
       });
     
@@ -46,6 +48,6 @@ const parseFile =  async(url) => {
  
   
  
- parseFile(url).then(()=>{console.log(wordsWithStats.slice(0,10))});
+ parseFile(url).then(()=>{console.log(wordsWithStats)});
 
   //console.log(wordsList);
